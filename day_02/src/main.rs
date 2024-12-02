@@ -18,6 +18,7 @@ fn main() {
         levels.push(level);
     }
     part_one(&levels);
+    part_two(&levels);
 }
 
 fn part_one(levels: &Vec<Vec<u32>>) {
@@ -25,6 +26,24 @@ fn part_one(levels: &Vec<Vec<u32>>) {
     for level in levels.iter() {
         if is_safe(level) {
             safe_count += 1;
+        }
+    }
+    println!("part one: {}", safe_count);
+}
+
+fn part_two(levels: &Vec<Vec<u32>>) {
+    let mut safe_count = 0;
+    for level in levels.iter() {
+        for i in 0..level.len() {
+            let mut level_slice = Vec::new();
+            for x in level[..i].iter().chain(level[i+1..].iter()) {
+                level_slice.push(*x);
+            }
+
+            if is_safe(&level_slice) {
+                safe_count += 1;
+                break;
+            }
         }
     }
     println!("part one: {}", safe_count);
