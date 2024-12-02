@@ -62,7 +62,7 @@ fn is_safe(level: &Vec<u32>) -> bool {
         }
 
         let diff = x.abs_diff(y);
-        if diff < 1 && diff > 3 {
+        if diff < 1 || diff > 3 {
             return false;
         }
     }
