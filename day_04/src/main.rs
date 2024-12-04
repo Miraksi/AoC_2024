@@ -12,6 +12,7 @@ fn main() {
     }
 
     part_one(&input);
+    part_two(&input);
 }
 
 
@@ -57,4 +58,32 @@ fn find_xmas(input: &Vec<Vec<char>>, mut i: usize, mut j: usize, x_dir: i16, y_d
         j = ((j as i16) + y_dir) as usize;
     }
     1
+}
+
+fn part_two(input: &Vec<Vec<char>>) {
+    let mut count = 0;
+    for (i, line) in input.iter().enumerate() {
+        for (j, c) in line.iter().enumerate() {
+            if *c != 'A' {
+                continue;
+            }
+            if is_cross_mas(input, i, j) {
+                count += 1;
+            }
+        }
+    }
+    println!("part one: {}", count);
+}
+
+fn is_cross_mas(input: &Vec<Vec<char>>, i: usize, j: usize) -> bool {
+    if i < 1 || i > input[0].len() - 2 {
+        return false;
+    }
+    if j < 1 || j > input.len() - 2 {
+        return false;
+    }
+    let first_diag = input[i-1][j-1] == 'M' && input[i+1][j+1] == 'S' || input[i-1][j-1] == 'S' && input[i+1][j+1] == 'M';
+    let second_diag = input[i-1][j+1] == 'M' && input[i+1][j-1] == 'S' || input[i-1][j+1] == 'S' && input[i+1][j-1] == 'M';
+
+    first_diag && second_diag
 }
