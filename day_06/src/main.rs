@@ -1,6 +1,6 @@
 use std::io::{BufReader, Read};
 use std::fs::File;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 
 fn main() {
     let file = File::open("input.txt").expect("File couldnt be opened");
